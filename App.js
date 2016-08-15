@@ -1,23 +1,24 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-// state component
 class App extends React.Component {
     render(){
-        return <h1>Hello World!</h1>
+        let txt = this.props.txt
+        // return <h1>{this.props.txt}</h1> //without the let
+        return <h1>{txt}</h1>
     }
 }
 
-const App2 = () => <h1>Hello Guys</h1> //stateless component
-
-// to put multiple elements, I wrap in parenthesis
-class App3 extends React.Component {
-    render(){
-        return (
-            <div>
-                <h1>Hello World!</h1>
-                <b>Bold</b>
-            </div>
-        )
-    }
+App.propTypes = {
+    txt: React.PropTypes.string,
+    cat: React.PropTypes.number.isRequired
 }
-export default App3
+
+App.defaultProps = {
+    txt: "this is default txt"
+}
+
+ReactDOM.render(
+    <App cat={5} />,
+    document.getElementById('app')
+);
