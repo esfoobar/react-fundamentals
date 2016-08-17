@@ -4,7 +4,11 @@ import ReactDOM from 'react-dom';
 class App extends React.Component {
     constructor(){
         super();
-        this.state = { txt: '' }
+        this.state = {
+          red: 0,
+          green: 0,
+          blue: 0
+        }
         this.update = this.update.bind(this)
     }
     update(e){
@@ -13,22 +17,28 @@ class App extends React.Component {
     render(){
         return (
             <div>
-                <Widget txt={this.state.txt} update={this.update} />
-                <Widget txt={this.state.txt} update={this.update} />
-                <Widget txt={this.state.txt} update={this.update} />
+              {this.state.txt}
+              <hr />
+              <Slider ref="red" update={this.update} />
+              <br />
+              <Slider ref="green" update={this.update} />
+              <br />
+              <Slider ref="blue" update={this.update} />
+              <br />
             </div>
         );
     }
 }
 
-const Widget = (props) => {
+class Slider extends React.Component {
+  render() {
     return (
-        <div>
-        <input type="text"
-            onChange={props.update} />
-        <h1>{props.txt}</h1>
-        </div>
-    );
+      <input type="range"
+        min="0"
+        max="255"
+        onChange={this.props.update} />
+      );
+  }
 }
 
 ReactDOM.render(
